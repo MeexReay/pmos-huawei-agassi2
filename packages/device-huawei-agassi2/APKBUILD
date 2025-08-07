@@ -3,7 +3,7 @@ pkgname=device-huawei-agassi2
 pkgdesc="Huawei Mediapad T5"
 pkgver=1
 pkgrel=0
-url="https://postmarketos.org"
+url="https://github.com/akku1139/MediaPad-T5-OpenSource"
 license="MIT"
 arch="aarch64"
 options="!check !archcheck"
@@ -26,4 +26,7 @@ package() {
 	devicepkg_package $startdir $pkgname
 }
 
-sha512sums="(run 'pmbootstrap checksum device-huawei-agassi2' to fill)"
+sha512sums="
+ee29c9b3c00538cefb8c12a6080c2c084e2ead09944d3388abd1da6c182d967dc62435a6e535e0d4a6faab5e3c453618a8378a76e7cf45d2a9689e2f0e00dd98  deviceinfo
+e70bae17df23dcaaaea0e2d3616556f04baa23f8ee1357785c0f539bf97282d8ddff53953e155b72689bb73beb38c2da3d08de2a61e866684edfa10a6593885d  modules-initfs
+"
