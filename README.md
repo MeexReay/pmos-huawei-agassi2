@@ -13,4 +13,4 @@ make
 
 ## How to get kernel.img and ramdisk.img from boot.img
 
-idk maybe later
+https://wiki.postmarketos.org/wiki/Honor_9_Lite_(huawei-leland)#How_to_flash
