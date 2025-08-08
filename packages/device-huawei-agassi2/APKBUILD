@@ -24,6 +24,7 @@ build() {
 
 package() {
 	devicepkg_package $startdir $pkgname
+	
 }
 
 sha512sums="

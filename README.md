@@ -3,6 +3,42 @@ PostmarketOS port for Huawei MediaPad T5
 
 Fastboot firmware images: https://files.meex.lol/huawei-agassi2/agassi2_firmware_fastboot.zip
 
+## installation
+
+create images:
+
+```sh
+git clone https://github.com/MeexReay/pmos-huawei-agassi2.git
+cd pmos-huawei-agassi2
+./install.sh
+pmbootstrap init # choose huawei-agassi2 here
+pmbootstrap install
+pmbootstrap export
+./make-images.sh
+```
+
+enter fastboot mode
+
+flash kernel:
+
+```sh
+fastboot flash kernel output/kernel.img
+fastboot flash ramdisk output/ramdisk.img
+```
+
+flash rootfs to sdcard:
+
+replace /path/to/sdcard with /dev/\<disk-id\> of your sdcard
+```sh
+dd if=output/rootfs.img of=/path/to/sdcard bs=2048 status=progress
+```
+
+reboot the device:
+
+```sh
+fastboot reboot
+```
+
 ## kernel.img, ramdisk.img -> boot.img
 
 ```sh
