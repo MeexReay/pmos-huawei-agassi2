@@ -33,6 +33,8 @@ replace /path/to/sdcard with /dev/\<disk-id\> of your sdcard
 dd if=output/rootfs.img of=/path/to/sdcard bs=2048 status=progress
 ```
 
+insert sdcard back to the device
+
 reboot the device:
 
 ```sh
