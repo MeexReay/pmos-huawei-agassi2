@@ -41,6 +41,13 @@ reboot the device:
 fastboot reboot
 ```
 
+## flash recovery
+
+```sh
+wget https://files.meex.lol/huawei-agassi2/agassi2_recovery_twrp.img
+fastboot flash recovery_ramdisk agassi2_recovery_twrp.img
+```
+
 ## kernel.img, ramdisk.img -> boot.img
 
 ```sh
