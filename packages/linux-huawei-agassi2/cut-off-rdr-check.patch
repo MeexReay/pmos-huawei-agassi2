@@ -1,0 +1,298 @@
+diff --git a/drivers/hisi/mntn/blackbox/rdr_bootcheck.c b/drivers/hisi/mntn/blackbox/rdr_bootcheck.c
+index bd5e80c10d4c..20bee681f89a 100644
+--- a/drivers/hisi/mntn/blackbox/rdr_bootcheck.c
++++ b/drivers/hisi/mntn/blackbox/rdr_bootcheck.c
+@@ -112,100 +112,100 @@ static int rdr_check_exceptionboot(struct bootcheck *info)
+ 
+ int rdr_bootcheck_thread_body(void *arg)
+ {
+-	int cur_reboot_times;
+-	int ret;
+-	u64 result;
+-	char path[PATH_MAXLEN];
+-	struct bootcheck info;
+-	struct rdr_syserr_param_s p;
+-	struct rdr_struct_s *temp_pbb;
+-	int max_reboot_times = rdr_get_reboot_times();
+-	BB_PRINT_START();
+-
+-	memset(path, 0, PATH_MAXLEN);
+-
+-	save_hwbootfailInfo_to_file();
+-
+-	BB_PRINT_DBG("============wait for fs ready start =============\n");
+-	while (rdr_wait_partition("/data/lost+found", 1000) != 0)
+-		;
+-	BB_PRINT_DBG("============wait for fs ready e n d =============\n");
+-
+-	if (is_need_save_dfx2file()) {
+-		save_dfxpartition_to_file();
+-	}
+-
+-	if (RDR_NEED_SAVE_MEM != rdr_check_exceptionboot(&info)) {
+-		BB_PRINT_ERR("need not save dump file when boot.\n");
+-		goto end;
+-	}
+-
+-	temp_pbb = rdr_get_tmppbb();
+-	if (RDR_UNEXPECTED_REBOOT_MARK_ADDR == temp_pbb->top_head.reserve) {
+-		cur_reboot_times = rdr_record_reboot_times2file();
+-		printk(KERN_ERR "ap has reboot %d times\n", cur_reboot_times);
+-		if (max_reboot_times < cur_reboot_times) {
+-			printk(KERN_ERR "need reboot to erecovery.\n");
+-
+-			/*write "erecovery_enter_reason:=2015" to cache*/
+-			rdr_record_erecovery_reason();
+-
+-			/*reset the file of reboot_times*/
+-			rdr_reset_reboot_times();
+-
+-			kernel_restart("erecovery");
+-		}
+-	} else {
+-		rdr_reset_reboot_times();
+-	}
+-    p.modid = info.modid, p.arg1 = info.core, p.arg2 = info.type;
+-
+-	ret = rdr_create_epath_bc(path);
+-	if (-1 == ret) {
+-		BB_PRINT_ERR("failed to create epath!\n");
+-		goto end;
+-	}
+-	rdr_set_saving_state(1);
+-	BB_PRINT_DBG("create dump file path:[%s].\n", path);
+-	while (info.mask) {
+-		if ((rdr_get_cur_regcore() & info.mask) == 0) {
+-			BB_PRINT_DBG
+-			    ("wait module register. cur:[0x%llx],need[0x%llx]\n",
+-			     rdr_get_cur_regcore(), info.mask);
+-			msleep(1000);
+-			continue;
+-		}
+-		result = rdr_notify_onemodule_dump(info.modid, info.mask,
+-						info.type, info.core, path);
+-		BB_PRINT_ERR("info.mask is [%llx], result = [0x%llx]\n", info.mask,
+-			     result);
+-		if (result) {
+-			info.mask &= (~result);
+-		} else {
+-			break;
+-		}
+-		BB_PRINT_ERR("rdr: notify [%s] core dump data done.\n",
+-			     rdr_get_exception_core(result));
+-	}
+-	if (check_himntn(HIMNTN_GOBAL_RESETLOG)) {
+-		rdr_save_last_baseinfo(path);
+-	}
+-
+-	/* 在异常目录下面新建DONE文件，标志此次异常log保存完毕 */
+-	bbox_save_done(path, BBOX_SAVE_STEP_DONE);
+-
+-	/* 文件系统sync，保证读写任务完成 */
+-	if (!in_atomic() && !irqs_disabled() && !in_irq()) {
+-		sys_sync();
+-	}
+-
+-	rdr_set_saving_state(0);
+-
+-	BB_PRINT_DBG("saving data done.\n");
+-	rdr_count_size();
+-	BB_PRINT_DBG("rdr_count_size: done.\n");
+-end:
+-	rdr_clear_tmppbb();
+-	BB_PRINT_END();
++// 	int cur_reboot_times;
++// 	int ret;
++// 	u64 result;
++// 	char path[PATH_MAXLEN];
++// 	struct bootcheck info;
++// 	struct rdr_syserr_param_s p;
++// 	struct rdr_struct_s *temp_pbb;
++// 	int max_reboot_times = rdr_get_reboot_times();
++// 	BB_PRINT_START();
++
++// 	memset(path, 0, PATH_MAXLEN);
++
++// 	save_hwbootfailInfo_to_file();
++
++// 	BB_PRINT_DBG("============wait for fs ready start =============\n");
++// 	while (rdr_wait_partition("/data/lost+found", 1000) != 0)
++// 		;
++// 	BB_PRINT_DBG("============wait for fs ready e n d =============\n");
++
++// 	if (is_need_save_dfx2file()) {
++// 		save_dfxpartition_to_file();
++// 	}
++
++// 	if (RDR_NEED_SAVE_MEM != rdr_check_exceptionboot(&info)) {
++// 		BB_PRINT_ERR("need not save dump file when boot.\n");
++// 		goto end;
++// 	}
++
++// 	temp_pbb = rdr_get_tmppbb();
++// 	if (RDR_UNEXPECTED_REBOOT_MARK_ADDR == temp_pbb->top_head.reserve) {
++// 		cur_reboot_times = rdr_record_reboot_times2file();
++// 		printk(KERN_ERR "ap has reboot %d times\n", cur_reboot_times);
++// 		if (max_reboot_times < cur_reboot_times) {
++// 			printk(KERN_ERR "need reboot to erecovery.\n");
++
++// 			/*write "erecovery_enter_reason:=2015" to cache*/
++// 			rdr_record_erecovery_reason();
++
++// 			/*reset the file of reboot_times*/
++// 			rdr_reset_reboot_times();
++
++// 			kernel_restart("erecovery");
++// 		}
++// 	} else {
++// 		rdr_reset_reboot_times();
++// 	}
++//     p.modid = info.modid, p.arg1 = info.core, p.arg2 = info.type;
++
++// 	ret = rdr_create_epath_bc(path);
++// 	if (-1 == ret) {
++// 		BB_PRINT_ERR("failed to create epath!\n");
++// 		goto end;
++// 	}
++// 	rdr_set_saving_state(1);
++// 	BB_PRINT_DBG("create dump file path:[%s].\n", path);
++// 	while (info.mask) {
++// 		if ((rdr_get_cur_regcore() & info.mask) == 0) {
++// 			BB_PRINT_DBG
++// 			    ("wait module register. cur:[0x%llx],need[0x%llx]\n",
++// 			     rdr_get_cur_regcore(), info.mask);
++// 			msleep(1000);
++// 			continue;
++// 		}
++// 		result = rdr_notify_onemodule_dump(info.modid, info.mask,
++// 						info.type, info.core, path);
++// 		BB_PRINT_ERR("info.mask is [%llx], result = [0x%llx]\n", info.mask,
++// 			     result);
++// 		if (result) {
++// 			info.mask &= (~result);
++// 		} else {
++// 			break;
++// 		}
++// 		BB_PRINT_ERR("rdr: notify [%s] core dump data done.\n",
++// 			     rdr_get_exception_core(result));
++// 	}
++// 	if (check_himntn(HIMNTN_GOBAL_RESETLOG)) {
++// 		rdr_save_last_baseinfo(path);
++// 	}
++
++// 	/* 在异常目录下面新建DONE文件，标志此次异常log保存完毕 */
++// 	bbox_save_done(path, BBOX_SAVE_STEP_DONE);
++
++// 	/* 文件系统sync，保证读写任务完成 */
++// 	if (!in_atomic() && !irqs_disabled() && !in_irq()) {
++// 		sys_sync();
++// 	}
++
++// 	rdr_set_saving_state(0);
++
++// 	BB_PRINT_DBG("saving data done.\n");
++// 	rdr_count_size();
++// 	BB_PRINT_DBG("rdr_count_size: done.\n");
++// end:
++// 	rdr_clear_tmppbb();
++// 	BB_PRINT_END();
+ 	return 0;
+ }
+diff --git a/drivers/hisi/mntn/blackbox/rdr_core.c b/drivers/hisi/mntn/blackbox/rdr_core.c
+index 65e0d318afcf..d3ca5e0ef57f 100644
+--- a/drivers/hisi/mntn/blackbox/rdr_core.c
++++ b/drivers/hisi/mntn/blackbox/rdr_core.c
+@@ -474,52 +474,52 @@ bool rdr_init_done()
+ 
+ static s32 __init rdr_init(void)
+ {
+-	struct task_struct *rdr_main = NULL;
+-	struct task_struct *rdr_bootcheck = NULL;
+-	struct sched_param   param;
+-
+-	BB_PRINT_START();
+-	if (!rdr_init_done()) {
+-		BB_PRINT_ERR("init environment faild.\n");
+-		return -1;
+-	}
+-	wake_lock_init(&blackbox_wl, WAKE_LOCK_SUSPEND, "blackbox");
+-	rdr_main = kthread_run(rdr_main_thread_body, NULL, "bbox_main");
+-	if (!rdr_main) {
+-		BB_PRINT_ERR("create thread rdr_main_thread faild.\n");
+-		wake_lock_destroy(&blackbox_wl);
+-		return -1;
+-	}
+-
+-	param.sched_priority = BBOX_RT_PRIORITY;
+-	if (sched_setscheduler(rdr_main, SCHED_FIFO, &param)) {
+-		BB_PRINT_ERR("sched_setscheduler rdr_bootcheck_thread faild.\n");
+-		kthread_stop(rdr_main);
+-		wake_lock_destroy(&blackbox_wl);
+-		return -1;
+-	}
+-	rdr_bootcheck =
+-	    kthread_run(rdr_bootcheck_thread_body, NULL, "bbox_bootcheck");
+-	if (!rdr_bootcheck) {
+-		BB_PRINT_ERR("create thread rdr_bootcheck_thread faild.\n");
+-		kthread_stop(rdr_main);
+-		wake_lock_destroy(&blackbox_wl);
+-		return -1;
+-	}
+-	if (!kthread_run(rdr_dump_init, NULL, "bbox_dump_init")) {
+-		BB_PRINT_ERR("create thread rdr_dump_init faild.\n");
+-		kthread_stop(rdr_main);
+-		wake_lock_destroy(&blackbox_wl);
+-		return -1;
+-	}
+-
+-	BB_PRINT_END();
++	// struct task_struct *rdr_main = NULL;
++	// struct task_struct *rdr_bootcheck = NULL;
++	// struct sched_param   param;
++
++	// BB_PRINT_START();
++	// if (!rdr_init_done()) {
++	// 	BB_PRINT_ERR("init environment faild.\n");
++	// 	return -1;
++	// }
++	// wake_lock_init(&blackbox_wl, WAKE_LOCK_SUSPEND, "blackbox");
++	// rdr_main = kthread_run(rdr_main_thread_body, NULL, "bbox_main");
++	// if (!rdr_main) {
++	// 	BB_PRINT_ERR("create thread rdr_main_thread faild.\n");
++	// 	wake_lock_destroy(&blackbox_wl);
++	// 	return -1;
++	// }
++
++	// param.sched_priority = BBOX_RT_PRIORITY;
++	// if (sched_setscheduler(rdr_main, SCHED_FIFO, &param)) {
++	// 	BB_PRINT_ERR("sched_setscheduler rdr_bootcheck_thread faild.\n");
++	// 	kthread_stop(rdr_main);
++	// 	wake_lock_destroy(&blackbox_wl);
++	// 	return -1;
++	// }
++	// rdr_bootcheck =
++	//     kthread_run(rdr_bootcheck_thread_body, NULL, "bbox_bootcheck");
++	// if (!rdr_bootcheck) {
++	// 	BB_PRINT_ERR("create thread rdr_bootcheck_thread faild.\n");
++	// 	kthread_stop(rdr_main);
++	// 	wake_lock_destroy(&blackbox_wl);
++	// 	return -1;
++	// }
++	// if (!kthread_run(rdr_dump_init, NULL, "bbox_dump_init")) {
++	// 	BB_PRINT_ERR("create thread rdr_dump_init faild.\n");
++	// 	kthread_stop(rdr_main);
++	// 	wake_lock_destroy(&blackbox_wl);
++	// 	return -1;
++	// }
++
++	// BB_PRINT_END();
+ 	return 0;
+ }
+ 
+ static void __exit rdr_exit(void)
+ {
+-	rdr_dump_exit();
++	// rdr_dump_exit();
+ 	return;
+ }
+ 

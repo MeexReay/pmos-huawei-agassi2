@@ -9,6 +9,7 @@ arch="aarch64"
 options="!check !archcheck"
 depends="
 	linux-huawei-agassi2
+	firmware-huawei-agassi2
 	mkbootimg
 	postmarketos-base
 "
@@ -28,6 +29,6 @@ package() {
 }
 
 sha512sums="
-ee29c9b3c00538cefb8c12a6080c2c084e2ead09944d3388abd1da6c182d967dc62435a6e535e0d4a6faab5e3c453618a8378a76e7cf45d2a9689e2f0e00dd98  deviceinfo
+302d88c50f7eafb91aa6ce882750a60b5e348171dafcddfc2a2112d90ebd2f7954c51f87abc8f5438bd8a262dd3dffc202a37fa43b6ce310383fd7f0e6fba497  deviceinfo
 e70bae17df23dcaaaea0e2d3616556f04baa23f8ee1357785c0f539bf97282d8ddff53953e155b72689bb73beb38c2da3d08de2a61e866684edfa10a6593885d  modules-initfs
 "

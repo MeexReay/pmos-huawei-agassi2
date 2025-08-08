@@ -1,0 +1,37 @@
+pkgname=firmware-huawei-agassi2
+pkgver=1
+pkgrel=0
+pkgdesc="Firmware files for Honor 9 Lite (huawei leland)"
+url="https://github.com/penn5/proprietary_vendor_huawei_hi6250-common"
+license="proprietary"
+depends=""
+options="!strip !check !archcheck"
+arch="all"
+
+# Source
+_commit="c6b2ef12886fdf8cde437a3e9dd664f7ae5a256a"
+_porter="penn5"
+_repo="proprietary_vendor_huawei_hi6250-common"
+_url="https://github.com/${_porter}/${_repo}"
+source="$pkgname-$_commit.tar.gz::$_url/archive/${_commit}.tar.gz"
+
+package() {
+	cd "$srcdir/${_repo}-$_commit/recovery/system/vendor/firmware/"
+
+	# /lib/firmware/postmarketos
+	_files="BCM4345C0_003.001.025.0033.0000_Generic.hcd Total.wdk fw_bcm4334_hw_2ant.bin fw_bcm4334_test_2ant.bin fw_bcm43455_apsta_hw.bin fw_bcm43455_hw.bin fw_bcm43455_test_hw_apsta.bin hifi_6402.img hifi_6402_2spk.img nvram43455_hw.txt nvram43455_hw_vn1.txt"
+	for _i in $_files; do
+		install -D -m644 "$_i" "$pkgdir/lib/firmware/postmarketos/$_i"
+	done
+
+	# /lib/firmware/postmarketos/ts
+	_files="Nemo_CS445A_default.bin Nemo_CS445A_junda.bin berlin_auo_ili9885.bin berlin_auo_nt35532.bin berlin_boe_nt35532.bin berlin_boe_nt35532_lens.bin berlin_inx_nt35532.bin berlin_inx_nt35532_lens.bin berlin_tm_nt35596.bin berlin_tm_nt35596_lens.bin berlin_tm_otm1901a.bin berlin_tm_r63350.bin berlin_tm_r63350_lens.bin prague_CYTT21403_default.bin venus_synaptics_VENS11080_jdi.img venus_synaptics_VENS11120_cmi.img venus_synaptics_VENS11130_boe.img venus_synaptics_VENS11140_ebbg.img venus_synaptics_VENS18100_lg.img"
+	for _i in $_files; do
+		install -D -m644 "ts/$_i" \
+			"$pkgdir/lib/firmware/postmarketos/ts/$_i"
+	done
+}
+
+sha512sums="
+bf7f3f491ab6ea34887bc74d25d733148b35b4109cfbd0c85702c679c522bfca227cd6a9e2574d7acbcd8d28a290d0dc97f4ebec3f90fcfd37be419aeeac0018  firmware-huawei-agassi2-c6b2ef12886fdf8cde437a3e9dd664f7ae5a256a.tar.gz
+"

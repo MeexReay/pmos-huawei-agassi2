@@ -5,13 +5,18 @@ Fastboot firmware images: https://files.meex.lol/huawei-agassi2/agassi2_firmware
 
 ## installation
 
-create images:
+init device:
 
 ```sh
 git clone https://github.com/MeexReay/pmos-huawei-agassi2.git
 cd pmos-huawei-agassi2
 ./install.sh
 pmbootstrap init # choose huawei-agassi2 here
+```
+
+create images:
+  
+```sh
 pmbootstrap install
 pmbootstrap export
 ./make-images.sh
@@ -26,14 +31,11 @@ fastboot flash kernel output/kernel.img
 fastboot flash ramdisk output/ramdisk.img
 ```
 
-flash rootfs to sdcard:
+flash rootfs:
 
-replace /path/to/sdcard with /dev/\<disk-id\> of your sdcard
 ```sh
-dd if=output/rootfs.img of=/path/to/sdcard bs=2048 status=progress
+pmbootstrap flasher flash_rootfs
 ```
-
-insert sdcard back to the device
 
 reboot the device:
 

@@ -30,11 +30,12 @@ _config="config-$_flavor.$arch"
 source="
 	$pkgname-$_commit.tar.gz::https://github.com/MeexReay/$_repository/archive/$_commit.tar.gz
 	$_config
+	cut-off-rdr-check.patch
 	linux4.2-gcc10-extern_YYLOC_global_declaration.patch
 	fix-check-lxdialog.patch
 	01_use_linux_alpine_crosscompile.patch
 	02_fix_undeclared_AID_INET.patch
-	03_add_compression_methods_to_Kconfig.patch
+	03_add_compression_methods_to_Kconfig.patch 
 	04_make_rdr_hisi_adapter_compileable.patch
 	05-disable-huawei-bfmr.patch
 	dtc-tool::https://github.com/JohnBergago/android_kernel_huawei_hi3660/raw/pmbootstrap_ready/tools/dtc
@@ -63,7 +64,8 @@ package() {
 
 sha512sums="
 a04d66e289fc3699edd91bc3c3d1f22c77ba530e7a14bc74057e41304247386eeb5a24f22f120cc4ab21c68e9fdc513e94a2d28d6590ab0f7b1752795a18a763  linux-huawei-agassi2-be8a0e576e736bdb4b7a19e65ced68d5e388dfbe.tar.gz
-d6feca144469ab8e8a9377f390b7858c2d6bf6a4e298765f7567df1a614e020d73f3bdf974a9517ad79385862688816da44b8be22f4d5a7649aa05b2ab9d6e0c  config-huawei-agassi2.aarch64
+12d70a7a3b996cc5169c8a95d2e249dbdd22b51ecb24eb5f7326dc59c66a76ea90164c673d963768fe39e10229a1eda92dd408da8b409ef90af10064009178c8  config-huawei-agassi2.aarch64
+e5577e64a7bde32e60055a7b3331f65d9f457744c9a4e4adbad2205914fd26a90a25e020a1930b75fff2c812b1fddf842c1d74c6bd50f791cf1a3b4388599de7  cut-off-rdr-check.patch
 eaf2e61fcb508cdd239b8fed209d2a09ecac77287f6b46d003918fdf1c6fa2ee63f7390f3ff7c49029b8ed6cbcdd81c7e9a4b1ece9f5060b6fc84e322bd47f41  linux4.2-gcc10-extern_YYLOC_global_declaration.patch
 182be3c596b9cc267ac108d7cf03fc8c328ccc6b36770800e4dcedea8d1bb65e3f5eacf590c2948f58b1418cc60a1670ba77dde8c259e428d158c31b6e1dbaf5  fix-check-lxdialog.patch
 5473a038ca5703cf4119957ca3af66972c121aa66fe262a3165e5a0e5714037670a96600eedd0488150ff754ead93f43299587554ca6c05022bb55f780d1cd7a  01_use_linux_alpine_crosscompile.patch

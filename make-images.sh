@@ -44,5 +44,5 @@ echo "fastboot flash ramdisk output/ramdisk.img"
 echo
 echo "3. Flash rootfs to sdcard:"
 echo
-echo "dd if=output/rootfs.img of=/path/to/sdcard bs=2048 status=progress"
-echo "# change /path/to/sdcard to your /dev/<disk_id> from lsblk or fdisk -l"
+echo "dd if=output/rootfs.img of=/dev/<disk-id> bs=4M status=progress"
+echo "# get <disk-id> from lsblk, for example sdd (not sdd1)"
