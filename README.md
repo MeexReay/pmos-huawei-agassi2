@@ -22,6 +22,8 @@ pmbootstrap export
 ./make-images.sh
 ```
 
+flash output/rootfs.img to sdcard
+
 enter fastboot mode
 
 flash kernel:
@@ -29,12 +31,6 @@ flash kernel:
 ```sh
 fastboot flash kernel output/kernel.img
 fastboot flash ramdisk output/ramdisk.img
-```
-
-flash rootfs to userdata (or to sdcard with dd):
-
-```sh
-pmbootstrap flasher flash_rootfs
 ```
 
 reboot the device:
