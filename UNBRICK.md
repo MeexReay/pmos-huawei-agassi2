@@ -1,5 +1,3 @@
-# THIS UNBRICK GUIDE IS INCOMPLETE!!!
-
 download stock files and scripts https://files.meex.lol/huawei-agassi2/agassi2_testpoint_flash_stock.zip
 
 disassembly the tablet
