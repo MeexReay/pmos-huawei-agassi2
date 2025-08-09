@@ -2,7 +2,7 @@ download stock files and scripts https://files.meex.lol/huawei-agassi2/agassi2_t
 
 disassembly the tablet
 
-short testpoint, conect usb, check lsusb for huawei device, if not, hold powewr button
+short testpoint, connect usb, check lsusb for huawei device, if there is not, hold power button
 
 run ./enter-fastboot.sh
 
