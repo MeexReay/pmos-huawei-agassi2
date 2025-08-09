@@ -31,7 +31,7 @@ fastboot flash kernel output/kernel.img
 fastboot flash ramdisk output/ramdisk.img
 ```
 
-flash rootfs:
+flash rootfs to userdata (or to sdcard with dd):
 
 ```sh
 pmbootstrap flasher flash_rootfs
