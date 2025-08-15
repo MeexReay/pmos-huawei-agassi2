@@ -10,4 +10,4 @@ now you are in fastboot mode, check it with `fastboot devices`
 
 run ./flash-fastboot.sh to flash firmware
 
-this is a weird chinese firmware, so i dont know , so if you can, find better board software and copy its usb_upgrade
+it will be a weird chinese firmware, but i think pmos can still be installed on it, and even twrp
