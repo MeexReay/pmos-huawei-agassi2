@@ -25,14 +25,14 @@ cd ..
 # make kernel and ramdisk images
 rm custom/empty.file
 touch custom/empty.file # todo: try /dev/null
-./android-unpackbootimg/mkbootimg.py \
+./custom/android-unpackbootimg/mkbootimg.py \
   --kernel custom/empty.file \
   --ramdisk custom/output/boot.img-ramdisk.gz \
   --cmdline 'buildvariant=user' \
   --os_version 8.0.0 \
   --os_patch_level 2018-06-05 \
   -o output/ramdisk.img
-./android-unpackbootimg/mkbootimg.py \
+./custom/android-unpackbootimg/mkbootimg.py \
   --kernel custom/output/boot.img-zImage \
   --ramdisk custom/empty.file \
   --cmdline 'loglevel=4 initcall_debug=y page_tracker=on slub_min_objects=16 unmovable_isolate1=2:192M,3:224M,4:256M printktimer=0xfff0a000,0x534,0x538 androidboot.selinux=enforcing buildvariant=user' \
