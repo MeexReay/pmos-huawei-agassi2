@@ -10,6 +10,8 @@ now you are in fastboot mode, check it with `fastboot devices`
 
 run ./flash-fastboot.sh to flash firmware
 
+you can flash twrp with ./flash-twrp.sh
+
 it will be a weird chinese firmware, but it still work
 
 to flash any image on it, you need to use ./generatecrc script from here: https://github.com/MeexReay/huawei-firmware-tools
