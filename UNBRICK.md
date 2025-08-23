@@ -42,4 +42,4 @@ fastboot reboot
 
 but it still didnt boot, so i stay on that first weird firmware
 
-we need a way to generate _sparse_crc32c of images, then we could flash stock firmware without rebooting to its fastboot. please contribute here [huawei-firmware-tools](https://github.com/MeexReay/huawei-firmware-tools) if you have a script
+we need a way to generate _sparse_crc32c of images, then we could flash stock firmware without rebooting to its fastboot. generatecrc32c from [huawei-firmware-tools](https://github.com/MeexReay/huawei-firmware-tools) makes some part of it
