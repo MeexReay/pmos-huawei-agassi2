@@ -21,9 +21,9 @@ flashing kernel and ramdisk will look like this:
 
 ```
 ./generatecrc kernel.img ramdisk.img
-fastboot flash huawei_crc_check kernel.img_crc.img
+fastboot flash huawei_crc_check kernel_crc.img
 fastboot flash kernel kernel.img
-fastboot flash huawei_crc_check ramdisk.img_crc.img
+fastboot flash huawei_crc_check ramdisk_crc.img
 fastboot flash ramdisk ramdisk.img
 ```
 
