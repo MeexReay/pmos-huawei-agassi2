@@ -14,13 +14,13 @@ you can flash twrp with ./flash-twrp.sh
 
 it will be a weird chinese firmware, but it still work
 
-to flash any image on it, you need to use ./generatecrc script from here: https://github.com/MeexReay/huawei-firmware-tools
+to flash any image on it, you need to use ./generatecrc16 script from here: https://github.com/MeexReay/huawei-firmware-tools
 you will need to install rsbkb to make it work (https://github.com/trou/rsbkb)
 
 flashing kernel and ramdisk will look like this:
 
 ```
-./generatecrc kernel.img ramdisk.img
+./generatecrc16 kernel.img ramdisk.img
 fastboot flash huawei_crc_check kernel_crc.img
 fastboot flash kernel kernel.img
 fastboot flash huawei_crc_check ramdisk_crc.img
