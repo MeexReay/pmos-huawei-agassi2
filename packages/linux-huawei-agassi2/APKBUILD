@@ -8,7 +8,7 @@ pkgdesc="Huawei Mediapad T5 kernel fork"
 arch="aarch64"
 _carch="arm64"
 _flavor="huawei-agassi2"
-url="https://github.com/MeexReay/linux-huawei-agassi2"
+url="https://codeberg.org/MeexReay/android_kernel_huawei_agassi2"
 license="GPL-2.0-only"
 options="!strip !check !tracedeps pmb:cross-native"
 makedepends="
@@ -24,11 +24,11 @@ makedepends="
 "
 
 # Source
-_repository="linux-huawei-agassi2"
+_repository="android_kernel_huawei_agassi2"
 _commit="be8a0e576e736bdb4b7a19e65ced68d5e388dfbe"
 _config="config-$_flavor.$arch"
 source="
-	$pkgname-$_commit.tar.gz::https://github.com/MeexReay/$_repository/archive/$_commit.tar.gz
+	$pkgname-$_commit.tar.gz::https://codeberg.org/MeexReay/$_repository/archive/$_commit.tar.gz
 	$_config
 	cut-off-rdr-check.patch
 	linux4.2-gcc10-extern_YYLOC_global_declaration.patch
